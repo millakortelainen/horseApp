@@ -10,3 +10,4 @@ Functions:
 * Adding a horse
 * Removing a horse
 * Sharing horses for students
+* Creating a lesson
