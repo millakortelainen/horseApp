@@ -11,3 +11,5 @@ Functions:
 * Removing a horse
 * Sharing horses for students
 * Creating a lesson
+
+[Link to database diagram](https://raw.githubusercontent.com/millakortelainen/horseApp/master/pics/horseApp.png)
