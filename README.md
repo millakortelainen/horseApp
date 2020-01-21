@@ -12,4 +12,4 @@ Functions:
 * Sharing horses for students
 * Creating a lesson
 
-[Link to database diagram](https://raw.githubusercontent.com/millakortelainen/horseApp/master/pics/horseApp.png)
+![databasediagram](https://raw.githubusercontent.com/millakortelainen/horseApp/master/pics/horseApp.png) "Database Diagram"
