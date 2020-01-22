@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block body %}
+  <form method="POST" action="{{ url_for('horses_update', horse_id=horse.id) }}">
+    <label for="name">Name:</label>
+    <input type="text" name="name" value={{ horse.name }} /><br>
+    <label for="gender">Gender:</label>
+    <input type="text" name="gender" value={{ horse.gender }} /><br>
+    <label for="breed">Breed:</label>
+    <input type="text" name="breed" value={{ horse.breed }} /><br>
+    <label for="skill_level">Skill level:</label>
+    <input type="text" name="skill_level" value={{ horse.skill_level }} /><br>
+    <input type="submit" value="Edit horse" />
+  </form>
+{% endblock %}

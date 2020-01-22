@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<form method="POST" action="{{ url_for('horses_create') }}">
+    <label for="name">Name:</label>
+    <input type="text" name="name" /><br>
+    <label for="gender">Gender:</label>
+    <input type="text" name="gender" /><br>
+    <label for="breed">Breed:</label>
+    <input type="text" name="breed" /><br>
+    <label for="skill_level">Skill level:</label>
+    <input type="text" name="skill_level" /><br>
+    <input type="submit" value="Add a new horse" />
+</form>
+{% endblock %}
