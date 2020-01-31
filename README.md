@@ -14,6 +14,7 @@ Task is to create a system for riding lessons. In each lesson there are students
 
 ## Test user
 Username: testuser
+
 Password: password
 
 [Link to Heroku](https://horse-app.herokuapp.com/)
