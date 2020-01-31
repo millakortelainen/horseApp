@@ -7,6 +7,7 @@
 </head>
 
 <body>
+  <a href="{{ url_for('auth_form') }}"> Luo käyttäjä.</a>
   {% if current_user.is_authenticated %}
   <p>
     Kirjautunut nimellä {{ current_user.name }}.

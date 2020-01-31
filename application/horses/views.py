@@ -5,7 +5,7 @@ from application.horses.forms import HorseForm
 
 @app.route("/horses/new/")
 def horses_form():
-    return render_template("horses/new.html", form=HorseForm(name="Milla"))
+    return render_template("horses/new.html", form=HorseForm())
 
 
 @app.route("/horses", methods=["GET"])
@@ -32,7 +32,6 @@ def horses_create():
 @app.route("/horses/<horse_id>/", methods=["POST"])
 def edit_horse(horse_id):
     horse = Horse.query.get(horse_id)
-    print("!!!!!!!!!!!!", horse.name)
     return render_template("horses/edit-horse.html", horse=Horse.query.get(horse_id),
                            form=HorseForm(name=horse.name,
                                               breed=horse.breed,
@@ -56,3 +55,12 @@ def horses_update(horse_id):
     db.session().commit()
 
     return redirect(url_for("horses_index"))
+
+@app.route("/horses/delete/<horse_id>/", methods=["POST"])
+def delete_horse(horse_id):
+    horse = Horse.query.get(horse_id)
+
+    db.session.delete(horse)
+
+    db.session().commit()
+    return render_template("horses/list.html", horses=Horse.query.all())
