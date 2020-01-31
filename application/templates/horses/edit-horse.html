@@ -1,15 +1,54 @@
 {% extends "layout.html" %}
 
 {% block body %}
-  <form method="POST" action="{{ url_for('horses_update', horse_id=horse.id) }}">
-    <label for="name">Name:</label>
-    <input type="text" name="name" value={{ horse.name }} /><br>
-    <label for="gender">Gender:</label>
-    <input type="text" name="gender" value={{ horse.gender }} /><br>
-    <label for="breed">Breed:</label>
-    <input type="text" name="breed" value={{ horse.breed }} /><br>
-    <label for="skill_level">Skill level:</label>
-    <input type="text" name="skill_level" value={{ horse.skill_level }} /><br>
-    <input type="submit" value="Edit horse" />
-  </form>
+<form method="POST" action="{{ url_for('horses_update', horse_id=horse.id) }}">
+  <table>
+    <tr>
+      <td>
+        {{ form.name.label }}
+      </td>
+      <td>
+        {{ form.name }}
+      </td>
+      <td>
+        <ul>
+          {% for error in form.name.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        {{ form.breed.label }}
+      </td>
+      <td>
+        {{ form.breed }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        {{ form.gender.label }}
+      </td>
+      <td>
+        {{ form.gender }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        {{ form.skill_level.label }}
+      </td>
+      <td>
+        {{ form.skill_level }}
+      </td>
+      <td>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <input type="submit" value="Edit horse" />
+      </td>
+    </tr>
+  </table>
+</form>
 {% endblock %}
