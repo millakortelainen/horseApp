@@ -1,20 +1,29 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>HorseApp</title>
-  </head>
 
-  <body>
-    <ul>
-      <li><a href="{{ url_for('horses_index') }}"> List horses </a></li>
-      <li><a href="{{ url_for('horses_form') }}"> Add a horse </a></li>
-    </ul>
-    {% block body %}
-      <p>
-        Content.
-      </p>
-    {% endblock %}
-  </body>
+<head>
+  <meta charset="utf-8">
+  <title>HorseApp</title>
+</head>
+
+<body>
+  {% if current_user.is_authenticated %}
+  <p>
+    Kirjautunut nimellä {{ current_user.name }}.
+    <a href="{{ url_for('auth_logout') }}">Kirjaudu ulos</a>
+  </p>
+  {% else %}
+  <a href="{{ url_for('auth_login') }}">Kirjaudu</a>
+  {% endif %}
+  <ul>
+    <li><a href="{{ url_for('horses_index') }}"> List horses </a></li>
+    <li><a href="{{ url_for('horses_form') }}"> Add a horse </a></li>
+  </ul>
+  {% block body %}
+  <p>
+    Content.
+  </p>
+  {% endblock %}
+</body>
+
 </html>
-
