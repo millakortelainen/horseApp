@@ -29,6 +29,10 @@
             <input type="submit" value="Delete"/>
           </form>
         </td>
+        <td>
+            <form method="POST" action="{{ url_for('sign_up_for_lesson', lesson_id=lesson.id) }}">
+                <input type="submit" value="Sign up"/>
+        </td>
     </tr>
     {% endfor %}
   </table>

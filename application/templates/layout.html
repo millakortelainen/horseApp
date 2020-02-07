@@ -7,10 +7,15 @@
 </head>
 
 <body>
- 
+
   {% if current_user.is_authenticated %}
   <p>
     Logged in as {{ current_user.name }}.
+    {% if current_user.is_teacher %}
+    <p>You are a teacher.</p>
+    {% else %}
+    You are a student.
+    {% endif %}
     <a href="{{ url_for('auth_logout') }}">Log out</a>
   </p>
   {% else %}
@@ -18,9 +23,16 @@
   {% endif %}
   <ul>
     <li><a href="{{ url_for('horses_index') }}"> List horses </a></li>
+    {% if current_user.is_teacher %}
     <li><a href="{{ url_for('horses_form') }}"> Add a horse </a></li>
+    {% endif %}
     <li><a href="{{ url_for('lessons_index') }}"> List lessons</a></li>
+    {% if current_user.is_teacher %}
     <li><a href="{{ url_for('lessons_form') }}"> Add a lesson</a></li>
+    {% endif %}
+
+
+
   </ul>
   {% block body %}
   <p>

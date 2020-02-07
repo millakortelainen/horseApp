@@ -40,7 +40,7 @@ def users_create():
     if not form.validate():
         return render_template("auth/new.html", form=form)
 
-    u = User(form.name.data, form.username.data, form.password.data)
+    u = User(form.name.data, form.username.data, form.password.data, form.is_teacher.data)
 
     db.session().add(u)
     db.session().commit()

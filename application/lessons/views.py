@@ -1,6 +1,6 @@
 from application import app, db
 from flask import redirect, render_template, request, url_for
-from flask_login import login_required
+from flask_login import login_required, current_user
 
 from application.lessons.models import Lesson
 from application.lessons.forms import LessonForm
@@ -66,3 +66,13 @@ def delete_lesson(lesson_id):
 
     db.session().commit()
     return render_template("lessons/list.html", lessons=Lesson.query.all())
+
+@app.route("/lessons/sign-up/<lesson_id>/", methods=["POST"])
+@login_required
+def sign_up_for_lesson(lesson_id):
+    u = current_user
+    u.lesson_id = lesson_id
+    db.session().add(u)
+    db.session().commit()
+  
+    return redirect(url_for("lessons_index"))

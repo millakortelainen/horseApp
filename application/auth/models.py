@@ -8,16 +8,23 @@ class User(Base):
     name = db.Column(db.String(144), nullable=False)
     username = db.Column(db.String(144), nullable=False)
     password = db.Column(db.String(144), nullable=False)
-    isStudent = db.Column(db.Boolean, nullable=False)
-    isTeacher = db.Column(db.Boolean, nullable=False)
+    is_student = db.Column(db.Boolean, nullable=False)
+    is_teacher = db.Column(db.Boolean, nullable=False)
 
-    def __init__(self, name, username, password):
+    lesson_id = db.Column(db.Integer, db.ForeignKey('lesson.id'))
+
+
+    def __init__(self, name, username, password, is_teacher):
         self.name = name
         self.username = username
         self.password = password
-        self.isStudent = True
-        self.isTeacher = False
-  
+        if is_teacher:
+            self.is_student = False
+            self.is_teacher = True
+        else:
+            self.is_student = True
+            self.is_teacher = False
+        
     def get_id(self):
         return self.id
 
