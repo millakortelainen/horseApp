@@ -27,11 +27,9 @@ class Lesson(Base):
                     " LEFT JOIN Account ON Account.lesson_id = Lesson.id"
                     " GROUP BY Lesson.id")
         res = db.engine.execute(stmt)
-        print("!!!!!!!!!!!!!!!!!!!")
-        print(res)
+        
         response = []
         for row in res:
-            print(row)
             response.append({"id":row[0], "day":row[1], "starts":row[2], "ends":row[3], "number_of_riders":row[4]})
-        print(response)
+       
         return response
