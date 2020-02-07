@@ -1,11 +1,9 @@
 from application import db
+from application.models import Base
+from sqlalchemy.sql import text
 
-class Horse(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
-    date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(),
-                                           onupdate=db.func.current_timestamp())
-
+class Horse(Base):
+  
     name = db.Column(db.String(144), nullable=False)
     gender = db.Column(db.String(10), nullable=False)
     breed = db.Column(db.String(144), nullable=True)

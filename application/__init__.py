@@ -21,6 +21,9 @@ from application.horses import views
 from application.auth import models
 from application.auth import views 
 
+from application.lessons import models
+from application.lessons import views
+
 # kirjautuminen
 from application.auth.models import User
 from os import urandom

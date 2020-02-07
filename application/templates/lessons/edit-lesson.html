@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<form method="POST" action="{{ url_for('lessons_update', lesson_id=lesson.id) }}">
+  <table>
+    <tr>
+      <td>
+        {{ form.day.label }}
+      </td>
+      <td>
+        {{ form.day }}
+      </td>
+      <td>
+    </tr>
+    <tr>
+        <td>
+          {{ form.start_time.label }}
+        </td>
+        <td>
+          {{ form.start_time }}
+        </td>
+        <td>
+      </tr>
+      <tr>
+        <td>
+          {{ form.end_time.label }}
+        </td>
+        <td>
+          {{ form.end_time }}
+        </td>
+        <td>
+      </tr>
+    <tr>
+      <td>
+        {{ form.price.label }}
+      </td>
+      <td>
+        {{ form.price }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        {{ form.skill_level.label }}
+      </td>
+      <td>
+        {{ form.skill_level }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        {{ form.type_of_lesson.label }}
+      </td>
+      <td>
+        {{ form.type_of_lesson }}
+      </td>
+      <td>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <input type="submit" value="Edit lesson" />
+      </td>
+    </tr>
+  </table>
+</form>
+{% endblock %}
