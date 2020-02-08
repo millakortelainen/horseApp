@@ -3,6 +3,7 @@ app = Flask(__name__)
 
 from flask_sqlalchemy import SQLAlchemy
 
+import sys
 import os
 
 if os.environ.get("HEROKU"):
@@ -44,5 +45,6 @@ try:
     print("TRYYY")
     db.create_all()
 except:
+    print(sys.exc_info())
     print("EI TOIMI ;____;!!!!!!!!!!!!!!!!")
     pass

@@ -1,12 +1,6 @@
 from application import db
 from application.models import Base
 from sqlalchemy.sql import text
-
-tags = db.Table('horses',
-    db.Column('tag_id', db.Integer, db.ForeignKey('tag.id'), primary_key=True),
-    db.Column('page_id', db.Integer, db.ForeignKey('page.id'), primary_key=True)
-)
-
 class Lesson(Base):
 
     day = db.Column(db.String(30), nullable=False)
