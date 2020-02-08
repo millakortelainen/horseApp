@@ -1,24 +1,24 @@
 {% extends "layout.html" %}
 
 {% block body %}
-  <h1> Horse App </h1>
+<h1> Horse App </h1>
 
 
-  <!--{% if all_riders is defined %}-->
+{% if all_riders is defined %}
 <p>
   Lessons' state
 </p>
-
-
- <!-- <ul>
-    {% for lesson in all_riders %}
-    <li>
-      On {{lesson.day}} {{lesson.starts}} to {{lesson.ends}} there are {{lesson.number_of_riders}} riders.
-    </li>
-    {% endfor %}
-  </ul>
-  
-  {% endif %}-->
+{% if not all_riders %}
+<p> There are no lessons listed right now. </p>
+{% else %}
+<ul>
+  {% for lesson in all_riders %}
+  <li>
+    On {{lesson.day}} {{lesson.starts}} to {{lesson.ends}} there are {{lesson.number_of_riders}} riders.
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endif %}
 
 {% endblock %}
-

@@ -42,9 +42,7 @@ def load_user(user_id):
     return User.query.get(user_id)
 
 try: 
-    print("TRYYY")
     db.create_all()
 except:
     print(sys.exc_info())
-    print("EI TOIMI ;____;!!!!!!!!!!!!!!!!")
     pass
