@@ -14,7 +14,13 @@ Task is to create a system for riding lessons. In each lesson there are students
 
 ## Test user
 
-At the moment heroku's database is broksen. So it is not possible to save users to the application.
+If you want to log in as a teacher use
+* Username: teacher
+* Password: teacher
+
+If you want to log in as a regular user use
+* Username: user
+* Password: user
 
 [Link to Heroku](https://horse-app.herokuapp.com/)
 
