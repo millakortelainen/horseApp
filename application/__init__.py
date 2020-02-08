@@ -41,6 +41,8 @@ def load_user(user_id):
     return User.query.get(user_id)
 
 try: 
+    print("TRYYY")
     db.create_all()
 except:
+    print("EI TOIMI ;____;!!!!!!!!!!!!!!!!")
     pass
