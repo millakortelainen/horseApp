@@ -26,6 +26,13 @@
             <td>
                 {{ form.breed }}
             </td>
+            <td>
+                <ul>
+                    {% for error in form.breed.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
         </tr>
         <tr>
             <td>
@@ -33,6 +40,13 @@
             </td>
             <td>
                 {{ form.gender }}
+            </td>
+            <td>
+                <ul>
+                    {% for error in form.gender.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
             </td>
         </tr>
         <tr>
@@ -43,6 +57,11 @@
                 {{ form.skill_level }}
             </td>
             <td>
+                <ul>
+                    {% for error in form.skill_level.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
             </td>
         </tr>
         <tr>

@@ -1,6 +1,10 @@
 from application import db
 from application.models import Base
 
+userlesson = db.Table('userlesson',
+    db.Column('user_id', db.Integer, db.ForeignKey('account.id'), primary_key=True),
+    db.Column('lesson_id', db.Integer, db.ForeignKey('lesson.id'), primary_key=True)
+)
 class User(Base):
 
     __tablename__ = "account"
@@ -10,10 +14,9 @@ class User(Base):
     password = db.Column(db.String(144), nullable=False)
     is_student = db.Column(db.Boolean, nullable=False)
     is_teacher = db.Column(db.Boolean, nullable=False)
+    lessons = db.relationship('Lesson', secondary=userlesson, backref='account')
 
-    lesson_id = db.Column(db.Integer, db.ForeignKey('lesson.id'))
-
-
+ 
     def __init__(self, name, username, password, is_teacher):
         self.name = name
         self.username = username
@@ -36,3 +39,4 @@ class User(Base):
 
     def is_authenticated(self):
         return True
+

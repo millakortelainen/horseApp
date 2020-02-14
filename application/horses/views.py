@@ -5,6 +5,7 @@ from flask_login import login_required
 from application.horses.models import Horse
 from application.horses.forms import HorseForm
 
+
 @app.route("/horses/new/")
 @login_required
 def horses_form():
@@ -25,10 +26,10 @@ def horses_create():
     if not form.validate():
         return render_template("horses/new.html", form=form)
 
-    h = Horse(form.name.data, form.gender.data,
-              form.breed.data, form.skill_level.data)
+    horse = Horse(form.name.data, form.gender.data,
+                  form.breed.data, form.skill_level.data)
 
-    db.session().add(h)
+    db.session().add(horse)
     db.session().commit()
 
     return redirect(url_for("horses_index"))
@@ -40,9 +41,9 @@ def edit_horse(horse_id):
     horse = Horse.query.get(horse_id)
     return render_template("horses/edit-horse.html", horse=Horse.query.get(horse_id),
                            form=HorseForm(name=horse.name,
-                                              breed=horse.breed,
-                                              gender=horse.gender,
-                                              skill_level=horse.skill_level))
+                                          breed=horse.breed,
+                                          gender=horse.gender,
+                                          skill_level=horse.skill_level))
 
 
 @app.route("/horses/update/<horse_id>", methods=["POST"])
@@ -53,15 +54,16 @@ def horses_update(horse_id):
     if not form.validate():
         return render_template("horses/edit-horse.html", form=form)
 
-    h = Horse.query.get(horse_id)
-    h.name = form.name.data
-    h.gender = form.gender.data
-    h.breed = form.breed.data
-    h.skill_level = form.skill_level.data
+    horse = Horse.query.get(horse_id)
+    horse.name = form.name.data
+    horse.gender = form.gender.data
+    horse.breed = form.breed.data
+    horse.skill_level = form.skill_level.data
 
     db.session().commit()
 
     return redirect(url_for("horses_index"))
+
 
 @app.route("/horses/delete/<horse_id>/", methods=["POST"])
 @login_required

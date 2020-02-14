@@ -4,6 +4,7 @@ from flask_login import login_required, current_user
 
 from application.lessons.models import Lesson
 from application.lessons.forms import LessonForm
+from application.horses.models import Horse
 
 
 @app.route("/lessons/new/")
@@ -15,14 +16,15 @@ def lessons_form():
 @app.route("/lessons", methods=["GET"])
 @login_required
 def lessons_index():
-    return render_template("lessons/list.html", lessons=Lesson.query.all())
+    return render_template("lessons/list.html", lessons=Lesson.query.all(), all_horses=Horse.query.all())
 
 
 @app.route("/lessons/", methods=["POST"])
 @login_required
 def lessons_create():
     form = LessonForm(request.form)
-    l = Lesson(form.day.data, form.start_time.data, form.end_time.data, form.price.data, form.skill_level.data, form.type_of_lesson.data)
+    l = Lesson(form.day.data, form.start_time.data, form.end_time.data,
+               form.price.data, form.skill_level.data, form.type_of_lesson.data)
 
     db.session().add(l)
     db.session().commit()
@@ -65,14 +67,26 @@ def delete_lesson(lesson_id):
     db.session.delete(lesson)
 
     db.session().commit()
-    return render_template("lessons/list.html", lessons=Lesson.query.all())
+    return render_template("lessons/list.html", lessons=Lesson.query.all(), all_horses=Horse.query.all())
+
 
 @app.route("/lessons/sign-up/<lesson_id>/", methods=["POST"])
 @login_required
 def sign_up_for_lesson(lesson_id):
-    u = current_user
-    u.lesson_id = lesson_id
-    db.session().add(u)
+    user = current_user
+    user.lessons.append(Lesson.query.get(lesson_id))
+    db.session().add(user)
     db.session().commit()
-  
+
     return redirect(url_for("lessons_index"))
+
+
+@app.route("/lessons/assign/<lesson_id>/", methods=["POST"])
+@login_required
+def assign_a_horse(lesson_id):
+    horse_id = request.form.get('picked_horse')
+    horse = Horse.query.get(horse_id)
+    horse.lessons.append(Lesson.query.get(lesson_id))
+    db.session().add(horse)
+    db.session().commit()
+    return render_template("lessons/list.html", lessons=Lesson.query.all(), all_horses=Horse.query.all())
