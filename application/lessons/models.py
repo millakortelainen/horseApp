@@ -22,14 +22,15 @@ class Lesson(Base):
 
     @staticmethod
     def count_all_riders():
-   #     stmt = text("SELECT Lesson.id, Lesson.day, Lesson.start_time, Lesson.end_time, COUNT(Account.id) FROM Lesson"
-   #                 " LEFT JOIN Account ON Account.lesson_id = Lesson.id"
-   #                 " GROUP BY Lesson.id")
-   #     res = db.engine.execute(stmt)
+        stmt = text("SELECT Lesson.id, Lesson.day, Lesson.start_time, Lesson.end_time, COUNT(Account.id) FROM Lesson"
+                    " LEFT OUTER JOIN userlesson ON Lesson.id = userlesson.lesson_id"
+                    " LEFT OUTER JOIN account ON userlesson.user_id = account.id"
+                    " GROUP BY Lesson.id")
+        res = db.engine.execute(stmt)
 
-   #     response = []
-   #     for row in res:
-   #         response.append(
-   #             {"id": row[0], "day": row[1], "starts": row[2], "ends": row[3], "number_of_riders": row[4]})
+        response = []
+        for row in res:
+            response.append(
+                {"id": row[0], "day": row[1], "starts": row[2], "ends": row[3], "number_of_riders": row[4]})
 
-        return 0
+        return response

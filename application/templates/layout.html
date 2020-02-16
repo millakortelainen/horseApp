@@ -35,6 +35,11 @@
           <a class="nav-link" href="{{ url_for('lessons_form') }}"> Add a lesson</a></li>
         </li>
         {% endif %}
+        {% if current_user.is_teacher %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('manage_lessons') }}"> Manage lessons</a></li>
+        </li>
+        {% endif %}
       </ul>
       <div class="form-inline mt-2 mt-md-0">
         {% if current_user.is_authenticated %}
