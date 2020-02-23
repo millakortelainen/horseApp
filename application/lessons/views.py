@@ -1,14 +1,15 @@
 from flask import redirect, render_template, request, url_for
-from flask_login import current_user, login_required
+from flask_login import current_user
 
-from application import app, db
+from application import app, db, login_required
 from application.lessons.models import Lesson
 from application.lessons.forms import LessonForm
 from application.horses.models import Horse
 from application.auth.models import User
+from application.horses_and_riders.models import HorsesAndRiders
 
 @app.route("/lessons/manage", methods=["GET"])
-@login_required
+@login_required(role="ADMIN")
 def manage_lessons():
     lessons_riders = {}
     riders = User.query.all()
@@ -17,6 +18,8 @@ def manage_lessons():
             if not lesson.id in lessons_riders:
                 lessons_riders[lesson.id]=[]
             lessons_riders[lesson.id].append([rider.id,rider.name])
+    
+    
     return render_template("lessons/manage-lessons.html", lessons=Lesson.query.all(), all_horses=Horse.query.all(), lessons_riders=lessons_riders)
 
 
@@ -30,6 +33,11 @@ def lessons_form():
 @login_required
 def lessons_index():
     return render_template("lessons/list.html", lessons=Lesson.query.all(), all_horses=Horse.query.all())
+
+@app.route("/lessons/set_horses/<lesson_id>", methods=["POST"])
+@login_required
+def set_horses(lesson_id):
+    return redirect(url_for("show_lesson", lesson_id=lesson_id))
 
 
 @app.route("/lessons/", methods=["POST"])

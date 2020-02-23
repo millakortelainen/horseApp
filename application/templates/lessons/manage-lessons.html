@@ -29,6 +29,11 @@
         <input type="submit" value="Delete" />
       </form>
     </td>
+    <td>
+      <form method="POST" action="{{ url_for('set_horses', lesson_id=lesson.id) }}">
+        <input type="submit" value="Set horses for riders" />
+      </form>
+    </td>
   </tr>
   <tr>
         
@@ -41,22 +46,8 @@
 
   <tr>
     <td>{{ rider[1] }}</td>
-    <td>
-    <select name="picked_horse">
-        <option value="">Choose a horse</option>
-        {% for horse in all_horses %}
-        <option value="{{ horse.id }}"> {{ horse.name }} </option>
-        {% endfor %}
-      </select>
-    </td>
   </tr>
     {% endfor %}
-    <tr>
-      <td>
-         <input type="submit" value="Confirm" />
-        </form>
-      </td>
-    </tr>
   {% else %}
   <tr>
     <td>

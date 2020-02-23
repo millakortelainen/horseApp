@@ -4,7 +4,6 @@ from sqlalchemy.sql import text
 
 
 class HorsesAndRiders(Base):
-
     lesson_id = db.Column(db.Integer, nullable=False)
     horse_id = db.Column(db.Integer, nullable=False)
     rider_id = db.Column(db.Integer, nullable=False)

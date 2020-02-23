@@ -1,7 +1,5 @@
 from application import db
 from application.models import Base
-
-
 from sqlalchemy.sql import text
 
 userlesson = db.Table('userlesson',
@@ -47,6 +45,9 @@ class User(Base):
     def is_authenticated(self):
         return True
 
+    def roles(self):
+        return ["ADMIN"]
+
     @staticmethod
     def users_lessons():
     #     stmt = text("SELECT User.id, User.name FROM Lesson"
@@ -60,3 +61,4 @@ class User(Base):
    #             {"id": row[0], "day": row[1], "starts": row[2], "ends": row[3], "number_of_riders": row[4]})
 
         return 0
+    

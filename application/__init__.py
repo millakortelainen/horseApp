@@ -26,6 +26,24 @@ login_manager.login_view = "auth_login"
 login_manager.login_message = "Please login to use this functionality."
 
 # roles in login_required
+from functools import wraps
+from flask_login import current_user
+
+def login_required(_func=None, *, role="ANY"):
+    def wrapper(func):
+        @wraps(func)
+        def decorated_view(*args, **kwargs):
+            if not (current_user and current_user.is_authenticated):
+                return login_manager.unauthorized()
+
+            acceptable_roles = set(("ANY", *current_user.roles()))
+
+            if role not in acceptable_roles:
+                return login_manager.unauthorized()
+
+            return func(*args, **kwargs)
+        return decorated_view
+    return wrapper if _func is None else wrapper(_func)
 
 # load application content
 from application import views
@@ -40,6 +58,7 @@ from application.lessons import models
 from application.lessons import views
 
 from application.horses_and_riders import models
+from application.horses_and_riders import views
 
 
 # login functionality, part 2
