@@ -1,6 +1,6 @@
 # Description of the database structure
 
-![databasediagram](https://raw.githubusercontent.com/millakortelainen/horseApp/master/documentation/pics/horseApp.png "Database Diagram")
+![databasediagram](documentation/img/horseApp.png "Database Diagram")
 
 ## CREATE TABLE-statements of the database
 
@@ -16,6 +16,8 @@ CREATE TABLE lesson (
 	type_of_lesson VARCHAR(144), 
 	PRIMARY KEY (id)
 );
+
+
 CREATE TABLE horse (
 	id INTEGER NOT NULL, 
 	date_created DATETIME, 
@@ -26,6 +28,8 @@ CREATE TABLE horse (
 	skill_level VARCHAR(50) NOT NULL, 
 	PRIMARY KEY (id)
 );
+
+
 CREATE TABLE account (
 	id INTEGER NOT NULL, 
 	date_created DATETIME, 
@@ -39,6 +43,8 @@ CREATE TABLE account (
 	CHECK (is_student IN (0, 1)), 
 	CHECK (is_teacher IN (0, 1))
 );
+
+
 CREATE TABLE horses_and_riders (
 	id INTEGER NOT NULL, 
 	date_created DATETIME, 
@@ -48,6 +54,8 @@ CREATE TABLE horses_and_riders (
 	rider_id INTEGER NOT NULL, 
 	PRIMARY KEY (id)
 );
+
+
 CREATE TABLE horselesson (
 	horse_id INTEGER NOT NULL, 
 	lesson_id INTEGER NOT NULL, 
@@ -55,6 +63,8 @@ CREATE TABLE horselesson (
 	FOREIGN KEY(horse_id) REFERENCES horse (id), 
 	FOREIGN KEY(lesson_id) REFERENCES lesson (id)
 );
+
+
 CREATE TABLE userlesson (
 	user_id INTEGER NOT NULL, 
 	lesson_id INTEGER NOT NULL, 
