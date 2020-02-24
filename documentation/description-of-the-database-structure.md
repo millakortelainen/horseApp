@@ -1,13 +1,13 @@
 # Description of the database structure
 
-![databasediagram](documentation/img/horseApp.png "Database Diagram")
+![databasediagram](img/horseApp.png "Database Diagram")
 
 ## CREATE TABLE-statements of the database
 
 CREATE TABLE lesson (
-	id INTEGER NOT NULL, 
-	date_created DATETIME, 
-	date_modified DATETIME, 
+    id INTEGER NOT NULL, 
+    date_created DATETIME, 
+    date_modified DATETIME, 
 	day VARCHAR(30) NOT NULL, 
 	start_time VARCHAR(10) NOT NULL, 
 	end_time VARCHAR(10) NOT NULL, 
