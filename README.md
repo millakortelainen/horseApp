@@ -1,4 +1,5 @@
 # the horse application
+[Link to Heroku](https://horse-app.herokuapp.com/)
 
 Task is to create a system for riding lessons. In each lesson there are students and every student needs a horse. Teacher gives a horse to student in application. Each lesson is created by the teacher. When the lesson is created the capacity, level and type of the lesson is decided. Student can sign up for the lesson. Student and teacher can see statistical information about his/her riding lessons.
 
@@ -22,7 +23,14 @@ If you want to log in as a regular user use
 * Username: user
 * Password: user
 
-[Link to Heroku](https://horse-app.herokuapp.com/)
+## Documentation
+[Descrition of the Database Structure](documentation/description-of-the-database-structure.md)
+[Installation Instructions]
+[Limitation and Missin Features of the application]
+[User Manual]
+[User Stories]
+
+
 
 [Link to application's user stories](https://github.com/millakortelainen/horseApp/blob/master/documentation/user-stories.md)
 
