@@ -35,4 +35,4 @@ If you want to log in as a regular user use
 
 * [User Stories](documentation/user-stories.md)
 
-![databasediagram](https://raw.githubusercontent.com/millakortelainen/horseApp/master/documentation/pics/horseApp.png "Database Diagram")
+![databasediagram](documentation/img/horseApp.png "Database Diagram")
