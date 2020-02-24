@@ -24,14 +24,15 @@ If you want to log in as a regular user use
 * Password: user
 
 ## Documentation
-[Descrition of the Database Structure](documentation/description-of-the-database-structure.md)
-[Installation Instructions]
-[Limitation and Missin Features of the application]
-[User Manual]
-[User Stories]
 
+* [Description of the Database Structure](documentation/description-of-the-database-structure.md)
 
+* [Installation Instructions](documentation/installation-instructions.md)
 
-[Link to application's user stories](https://github.com/millakortelainen/horseApp/blob/master/documentation/user-stories.md)
+* [Limitation and Missin Features of the application](documentation/limitations-and-missing-features-of-application.md)
+
+* [User Manual](documentation/user-manual.md)
+
+* [User Stories](documentation/user-stories.md)
 
 ![databasediagram](https://raw.githubusercontent.com/millakortelainen/horseApp/master/documentation/pics/horseApp.png "Database Diagram")
