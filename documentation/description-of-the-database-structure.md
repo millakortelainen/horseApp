@@ -4,10 +4,10 @@
 
 ## CREATE TABLE-statements of the database
 
-CREATE TABLE lesson (
-    id INTEGER NOT NULL, 
-    date_created DATETIME, 
-    date_modified DATETIME, 
+`CREATE TABLE lesson (
+    	id INTEGER NOT NULL, 
+    	date_created DATETIME, 
+    	date_modified DATETIME, 
 	day VARCHAR(30) NOT NULL, 
 	start_time VARCHAR(10) NOT NULL, 
 	end_time VARCHAR(10) NOT NULL, 
@@ -15,7 +15,7 @@ CREATE TABLE lesson (
 	skill_level VARCHAR(144), 
 	type_of_lesson VARCHAR(144), 
 	PRIMARY KEY (id)
-);
+);`
 
 
 CREATE TABLE horse (
