@@ -46,7 +46,7 @@ class User(Base):
         return True
 
     def roles(self):
-        return ["ADMIN"]
+        return ["ADMIN","USER"]
 
     @staticmethod
     def users_lessons():
