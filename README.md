@@ -29,7 +29,7 @@ If you want to log in as a regular user use
 
 * [Installation Instructions](documentation/installation-instructions.md)
 
-* [Limitation and Missin Features of the application](documentation/limitations-and-missing-features-of-application.md)
+* [Limitation and Missing Features of the application](documentation/limitations-and-missing-features-of-application.md)
 
 * [User Manual](documentation/user-manual.md)
 
