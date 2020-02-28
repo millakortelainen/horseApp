@@ -6,9 +6,9 @@
 
 ```sql
 CREATE TABLE lesson (
-    	id INTEGER NOT NULL, 
-    	date_created DATETIME, 
-    	date_modified DATETIME, 
+	id INTEGER NOT NULL, 
+	date_created DATETIME, 
+	date_modified DATETIME, 
 	day VARCHAR(30) NOT NULL, 
 	start_time VARCHAR(10) NOT NULL, 
 	end_time VARCHAR(10) NOT NULL, 
@@ -40,7 +40,7 @@ CREATE TABLE account (
 	date_modified DATETIME, 
 	name VARCHAR(144) NOT NULL, 
 	username VARCHAR(144) NOT NULL, 
-	passd VARCHAR(144) NOT NULL, 
+	password VARCHAR(144) NOT NULL, 
 	is_student BOOLEAN NOT NULL, 
 	is_teacher BOOLEAN NOT NULL, 
 	PRIMARY KEY (id), 
@@ -51,36 +51,16 @@ CREATE TABLE account (
 ```
 
 ```sql
-CREATE TABLE horses_and_riders (
+CREATE TABLE horse_rider_lesson (
 	id INTEGER NOT NULL, 
-	date_created DATETIME, 
-	date_modified DATETIME, 
+	account_id INTEGER NOT NULL, 
 	lesson_id INTEGER NOT NULL, 
-	horse_id INTEGER NOT NULL, 
-	rider_id INTEGER NOT NULL, 
-	PRIMARY KEY (id)
+	horse_id INTEGER, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(account_id) REFERENCES account (id), 
+	FOREIGN KEY(lesson_id) REFERENCES lesson (id), 
+	FOREIGN KEY(horse_id) REFERENCES horse (id)
 );
 
 ```
 
-```sql
-CREATE TABLE horselesson (
-	horse_id INTEGER NOT NULL, 
-	lesson_id INTEGER NOT NULL, 
-	PRIMARY KEY (horse_id, lesson_id), 
-	FOREIGN KEY(horse_id) REFERENCES horse (id), 
-	FOREIGN KEY(lesson_id) REFERENCES lesson (id)
-);
-
-```
-
-```sql
-CREATE TABLE userlesson (
-	user_id INTEGER NOT NULL, 
-	lesson_id INTEGER NOT NULL, 
-	PRIMARY KEY (user_id, lesson_id), 
-	FOREIGN KEY(user_id) REFERENCES account (id), 
-	FOREIGN KEY(lesson_id) REFERENCES lesson (id)
-);
-
-```
