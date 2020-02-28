@@ -4,6 +4,7 @@ from flask_login import login_required
 
 from application.horses.models import Horse
 from application.horses.forms import HorseForm
+from application.horses_riders_lessons.models import HorseRiderLesson
 
 
 @app.route("/horses/new/")
@@ -69,6 +70,11 @@ def horses_update(horse_id):
 @login_required
 def delete_horse(horse_id):
     horse = Horse.query.get(horse_id)
+    all = HorseRiderLesson.query.all()
+
+    for i in all:
+        if(i.horse_id == int(horse_id)):
+            i.horse.id = None
 
     db.session.delete(horse)
 

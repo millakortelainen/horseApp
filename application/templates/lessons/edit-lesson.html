@@ -2,7 +2,7 @@
 
 {% block body %}
 <form class="table" method="POST" action="{{ url_for('lessons_update', lesson_id=lesson.id) }}">
-  <table>
+  <table class="table">
     <tr>
       <td>
         {{ form.day.label }}
@@ -43,7 +43,7 @@
         {{ form.skill_level.label }}
       </td>
       <td>
-        {{ form.skill_level }}
+        {{ form.skill_level.data }}
       </td>
     </tr>
     <tr>

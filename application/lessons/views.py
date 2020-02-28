@@ -25,13 +25,12 @@ def lessons_form():
 @app.route("/lessons", methods=["GET"])
 @login_required
 def lessons_index():
-    return render_template("lessons/list.html", lessons=Lesson.get_lessons(current_user.skill_level))
+    return render_template("lessons/list.html", lessons=Lesson.get_lessons(current_user.skill_level), lessons_of_rider = HorseRiderLesson.lessons_of_rider(current_user.id))
 
 
 @app.route("/lessons/", methods=["POST"])
 @login_required
 def lessons_create():
-    # Tallenna tunti tietokantaan
     form = LessonForm(request.form)
     lesson = Lesson(form.day.data, form.start_time.data, form.end_time.data,
                     form.price.data, form.skill_level.data, form.type_of_lesson.data)
@@ -101,6 +100,11 @@ def lessons_update(lesson_id):
 @login_required
 def delete_lesson(lesson_id):
     lesson = Lesson.query.get(lesson_id)
+    all = HorseRiderLesson.query.all()
+
+    for i in all:
+        if(i.lesson_id==int(lesson_id)):
+            db.session.delete(i)
 
     db.session.delete(lesson)
 
@@ -118,3 +122,16 @@ def sign_up_for_lesson(lesson_id):
         db.session().commit()
 
     return redirect(url_for("lessons_index"))
+
+@app.route("/lessons/cancel/<lesson_id>/", methods=["POST"])
+@login_required
+def cancel_lesson(lesson_id):
+    all = HorseRiderLesson.query.all()
+
+    for i in all:
+        if(i.lesson_id==int(lesson_id)):
+            db.session.delete(i)
+
+    db.session().commit()
+    return redirect(url_for("lessons_index"))
+

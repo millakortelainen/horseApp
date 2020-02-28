@@ -24,9 +24,15 @@
     <td>{{ lesson.skill_level }}</td>
     <td>{{ lesson.type_of_lesson }}</td>
     <td>
+      {%if lesson.id in lessons_of_rider %}
+      <form method="POST" action="{{ url_for('cancel_lesson', lesson_id=lesson.id) }}">
+        <input type="submit" value="Cancel registration" />
+      </form>
+      {% else%}
       <form method="POST" action="{{ url_for('sign_up_for_lesson', lesson_id=lesson.id) }}">
         <input type="submit" value="Sign up" />
       </form>
+      {% endif %}
     </td>
   </tr>
   {% endfor %}

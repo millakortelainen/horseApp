@@ -3,11 +3,15 @@
 {% block body %}
 <h1> Horse App </h1>
 
+{%if not current_user.is_active%}
+<p>You are not currently logged in.</p>
+<p>Please, create a new user or login to use the application.</p>
+{% endif %}
 
 {% if all_riders is defined %}
-<p>
-  Lessons' state
-</p>
+
+<h2>Lessons' state</h2>
+  
 {% if not all_riders %}
 <p> There are no lessons listed right now. </p>
 {% else %}

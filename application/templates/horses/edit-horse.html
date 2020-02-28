@@ -2,7 +2,7 @@
 
 {% block body %}
 <form method="POST" action="{{ url_for('horses_update', horse_id=horse.id) }}">
-  <table>
+  <table class="table">
     <tr>
       <td>
         {{ form.name.label }}
@@ -39,7 +39,7 @@
         {{ form.skill_level.label }}
       </td>
       <td>
-        {{ form.skill_level }}
+        {{ form.skill_level.data }}
       </td>
       <td>
       </td>
