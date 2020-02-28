@@ -17,7 +17,7 @@ def manage_lessons():
 
 
 @app.route("/lessons/new/")
-@login_required
+@login_required(role="ADMIN")
 def lessons_form():
     return render_template("lessons/new.html", form=LessonForm())
 
@@ -29,7 +29,7 @@ def lessons_index():
 
 
 @app.route("/lessons/", methods=["POST"])
-@login_required
+@login_required(role="ADMIN")
 def lessons_create():
     form = LessonForm(request.form)
     lesson = Lesson(form.day.data, form.start_time.data, form.end_time.data,
@@ -41,7 +41,7 @@ def lessons_create():
 
 
 @app.route("/lessons/<lesson_id>/", methods=["POST"])
-@login_required
+@login_required(role="ADMIN")
 def edit_lesson(lesson_id):
     lesson = Lesson.query.get(lesson_id)
     return render_template("lessons/edit-lesson.html", lesson=Lesson.query.get(lesson_id),
@@ -50,7 +50,7 @@ def edit_lesson(lesson_id):
 
 
 @app.route("/lessons/set-horses/<lesson_id>/", methods=["POST"])
-@login_required
+@login_required(role="ADMIN")
 def set_horses(lesson_id):
     lessons_riders=[]
     riders = db.session.query(HorseRiderLesson).filter_by(lesson_id=lesson_id)
@@ -67,7 +67,7 @@ def set_horses(lesson_id):
                             form=form, horses_at_lesson=HorseRiderLesson.horses_of_lesson(lesson_id))
 
 @app.route("/lessons/set-horse/<lesson_id>and<horse_id>/", methods=["POST"])
-@login_required
+@login_required(role="ADMIN")
 def set_horse(lesson_id, horse_id):
     form = HorsesForRidersForm(request.form)
     if form.riders.data == "None":
@@ -79,7 +79,7 @@ def set_horse(lesson_id, horse_id):
     return redirect(url_for("manage_lessons"))
 
 @app.route("/lessons/update/<lesson_id>", methods=["POST"])
-@login_required
+@login_required(role="ADMIN")
 def lessons_update(lesson_id):
     form = LessonForm(request.form)
 
@@ -97,7 +97,7 @@ def lessons_update(lesson_id):
 
 
 @app.route("/lessons/delete/<lesson_id>/", methods=["POST"])
-@login_required
+@login_required(role="ADMIN")
 def delete_lesson(lesson_id):
     lesson = Lesson.query.get(lesson_id)
     all = HorseRiderLesson.query.all()

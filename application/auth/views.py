@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, url_for
 from flask_login import login_user, logout_user, current_user
 
-from application import app, db
+from application import app, db, login_required
 from application.auth.models import User
 from application.auth.forms import LoginForm, NewUserForm, EditUserForm
 from application.horses_riders_lessons.models import HorseRiderLesson
@@ -48,10 +48,12 @@ def users_create():
     return redirect(url_for("index"))
 
 @app.route("/auth/edit")
+@login_required
 def user_edit():
     return render_template("auth/edit.html", form=EditUserForm())
 
 @app.route("/auth/update/user", methods=["POST"])
+@login_required
 def user_update():
     form = EditUserForm(request.form)
     current_user.skill_level = form.skill_level.data
@@ -59,6 +61,7 @@ def user_update():
     return redirect(url_for("user_edit"))
 
 @app.route("/auth/statistics")
+@login_required
 def statistics():
     users_lessons = []
     lesson_ids = HorseRiderLesson.lessons_of_rider(current_user.id)
