@@ -45,16 +45,19 @@ class User(Base):
             return ["ADMIN"]
 
     @staticmethod
-    def users_lessons():
-    #     stmt = text("SELECT User.id, User.name FROM Lesson"
-   #                 " LEFT JOIN Account ON Account.lesson_id = Lesson.id"
-   #                 " GROUP BY Lesson.id")
-   #     res = db.engine.execute(stmt)
+    def horses_of_rider(user_id):
 
-   #     response = []
-   #     for row in res:
-   #         response.append(
-   #             {"id": row[0], "day": row[1], "starts": row[2], "ends": row[3], "number_of_riders": row[4]})
+        stmt = text("SELECT Horse.id, Horse.name, Horse.breed, Horse.gender, COUNT(Account.id) FROM Horse"
+                    " LEFT OUTER JOIN horse_rider_lesson ON Horse.id = horse_rider_lesson.horse_id"
+                    " LEFT OUTER JOIN account ON horse_rider_lesson.account_id = account.id"
+                    " WHERE Account.id = :a"
+                    " GROUP BY Horse.id")
+        res = db.engine.execute(stmt, a=user_id)
 
-        return 0
+        response = []
+        for row in res:
+            response.append(
+                {"id": row[0], "name": row[1], "breed": row[2], "gender": row[3], "number_of_rides": row[4]})
+
+        return response
     

@@ -4,7 +4,8 @@ from flask_login import login_user, logout_user, current_user
 from application import app, db
 from application.auth.models import User
 from application.auth.forms import LoginForm, NewUserForm, EditUserForm
-
+from application.horses_riders_lessons.models import HorseRiderLesson
+from application.lessons.models import Lesson
 
 @app.route("/auth/login", methods=["GET", "POST"])
 def auth_login():
@@ -56,3 +57,12 @@ def user_update():
     current_user.skill_level = form.skill_level.data
     db.session().commit()
     return redirect(url_for("user_edit"))
+
+@app.route("/auth/statistics")
+def statistics():
+    users_lessons = []
+    lesson_ids = HorseRiderLesson.lessons_of_rider(current_user.id)
+    for lesson_id in lesson_ids:
+        users_lessons.append(Lesson.query.get(lesson_id))
+    
+    return render_template("auth/statistics.html", lessons=users_lessons, horse_data = User.horses_of_rider(current_user.id))
