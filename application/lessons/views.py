@@ -54,7 +54,6 @@ def edit_lesson(lesson_id):
 def set_horses(lesson_id):
     lessons_riders=[]
     riders = db.session.query(HorseRiderLesson).filter_by(lesson_id=lesson_id)
-    #not actuallu a rider lsit
     for rider in riders:
         if rider.horse_id is None:
             lessons_riders.append((rider.account_id, User.query.get(rider.account_id).name))
@@ -66,7 +65,7 @@ def set_horses(lesson_id):
     return render_template("lessons/horses-for-riders-at-lesson.html", lesson=lesson, horses = Horse.get_horses(lesson.skill_level),
                             form=form, horses_at_lesson=HorseRiderLesson.horses_of_lesson(lesson_id))
 
-@app.route("/lessons/set-horse/<lesson_id>and<horse_id>/", methods=["POST"])
+@app.route("/lessons/set-horse/<lesson_id>and<horse_id>/", methods=["GET"])
 @login_required(role="ADMIN")
 def set_horse(lesson_id, horse_id):
     form = HorsesForRidersForm(request.form)
