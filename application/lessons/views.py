@@ -65,7 +65,7 @@ def set_horses(lesson_id):
     return render_template("lessons/horses-for-riders-at-lesson.html", lesson=lesson, horses = Horse.get_horses(lesson.skill_level),
                             form=form, horses_at_lesson=HorseRiderLesson.horses_of_lesson(lesson_id))
 
-@app.route("/lessons/set-horse/<lesson_id>and<horse_id>/", methods=["GET"])
+@app.route("/lessons/set-horse/<lesson_id>and<horse_id>/", methods=["POST"])
 @login_required(role="ADMIN")
 def set_horse(lesson_id, horse_id):
     form = HorsesForRidersForm(request.form)
