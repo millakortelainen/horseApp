@@ -2,6 +2,7 @@ from application import db
 from application.models import Base
 from sqlalchemy.sql import text
 
+
 class User(Base):
 
     __tablename__ = "account"
@@ -60,4 +61,18 @@ class User(Base):
                 {"id": row[0], "name": row[1], "breed": row[2], "gender": row[3], "number_of_rides": row[4]})
 
         return response
-    
+
+    @staticmethod
+    def prices(user_id):
+
+        stmt = text("SELECT Lesson.price FROM Lesson"
+                    " LEFT OUTER JOIN horse_rider_lesson ON Lesson.id = horse_rider_lesson.lesson_id"
+                    " LEFT OUTER JOIN account ON horse_rider_lesson.account_id = account.id"
+                    " WHERE Account.id = :a")
+        res = db.engine.execute(stmt, a=user_id)
+
+        total_price = 0
+        for row in res:
+            total_price += int(row[0])
+
+        return total_price

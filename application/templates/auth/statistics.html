@@ -1,45 +1,56 @@
 {% extends "layout.html" %}
 
 {% block body %}
- <h1>My riding lessons</h1>
+<h1>My riding lessons</h1>
 
- <table class="table">
-    <tr>
-      <th>Date</th>
-      <th>Start at</th>
-      <th>Ends at</th>
-      <th>Price</th>
-      <th>Skill Level</th>
-      <th>Type Of Lesson</th>
-    </tr>
-    {% for lesson in lessons %}
-    <tr>
-      <td>{{ lesson.day }}</td>
-      <td>{{ lesson.start_time }}</td>
-      <td>{{ lesson.end_time }}</td>
-      <td>{{ lesson.price }}</td>
-      <td>{{ lesson.skill_level }}</td>
-      <td>{{ lesson.type_of_lesson }}</td>
-    </tr>
-    {% endfor %}
-  </table>
+{% if not lessons%}
+<p>Sign up for lesson to see your lessons.</p>
+{% else %}
+<table class="table">
+  <tr>
+    <th>Date</th>
+    <th>Start at</th>
+    <th>Ends at</th>
+    <th>Price</th>
+    <th>Skill Level</th>
+    <th>Type Of Lesson</th>
+  </tr>
+  {% for lesson in lessons %}
+  <tr>
+    <td>{{ lesson.day }}</td>
+    <td>{{ lesson.start_time }}</td>
+    <td>{{ lesson.end_time }}</td>
+    <td>{{ lesson.price }}</td>
+    <td>{{ lesson.skill_level }}</td>
+    <td>{{ lesson.type_of_lesson }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
 
- <h1>Statistics</h1>
- <h2>Favorite horses</h2>
- <table class="table">
-    <tr>
-      <th>Name</th>
-      <th>Breed</th>
-      <th>Gender</th>
-      <th>Number of riding times</th>
-    </tr>
-    {% for horse in horse_data %}
-    <tr>
-      <td>{{ horse.name }}</td>
-      <td>{{ horse.breed }}</td>
-      <td>{{ horse.gender }}</td>
-      <td>{{ horse.number_of_rides }}</td>
-    </tr>
-    {% endfor %}
-  </table>
+<h1>Statistics</h1>
+<h2>Favorite horses</h2>
+{% if not horse_data %}
+<p>You have not ridden any horses yet.</p>
+
+{% else %}
+<table class="table">
+  <tr>
+    <th>Name</th>
+    <th>Breed</th>
+    <th>Gender</th>
+    <th>Number of riding times</th>
+  </tr>
+  {% for horse in horse_data %}
+  <tr>
+    <td>{{ horse.name }}</td>
+    <td>{{ horse.breed }}</td>
+    <td>{{ horse.gender }}</td>
+    <td>{{ horse.number_of_rides }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
+
+<h3>You have spent {{ total_price }} euros in riding lessons.</h3>
 {% endblock %}

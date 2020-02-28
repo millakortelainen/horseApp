@@ -67,5 +67,6 @@ def statistics():
     lesson_ids = HorseRiderLesson.lessons_of_rider(current_user.id)
     for lesson_id in lesson_ids:
         users_lessons.append(Lesson.query.get(lesson_id))
+
     
-    return render_template("auth/statistics.html", lessons=users_lessons, horse_data = User.horses_of_rider(current_user.id))
+    return render_template("auth/statistics.html", lessons=users_lessons, horse_data = User.horses_of_rider(current_user.id), total_price=User.prices(current_user.id))
