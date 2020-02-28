@@ -7,3 +7,6 @@
 * Run `python run.py` to start application in localhost.
 * Use the web browser to go [http://localhost:5000/](http://localhost:5000/).
 Now the application is usable in local environment.
+
+## or you can just use heroku version
+[Link to heroku version of the app](https://horse-app.herokuapp.com/)
