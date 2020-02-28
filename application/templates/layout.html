@@ -19,10 +19,10 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto">
+        {% if current_user.is_teacher %}
         <li class="nav-item">
           <a class="nav-link" href="{{ url_for('horses_index') }} ">List horses</a>
         </li>
-        {% if current_user.is_teacher %}
         <li class="nav-item">
           <a class="nav-link" href="{{ url_for('horses_form') }} ">Add a horse</a>
         </li>
@@ -40,9 +40,14 @@
           <a class="nav-link" href="{{ url_for('manage_lessons') }}"> Manage lessons</a></li>
         </li>
         {% endif %}
+        {% if current_user.is_active %}
+        <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('user_edit') }}"> Edit your account</a></li>
+      </li>
+        {%endif%}
       </ul>
       <div class="form-inline mt-2 mt-md-0">
-        {% if current_user.is_authenticated %}
+        {% if current_user.is_active %}
         <a href="{{ url_for('auth_logout') }}">Hello {{ current_user.name }} -- Logout</a>
         {% if current_user.is_teacher %}
         You are a teacher.

@@ -9,8 +9,10 @@ class Lesson(Base):
     start_time = db.Column(db.String(10), nullable=False)
     end_time = db.Column(db.String(10), nullable=False)
     price = db.Column(db.String(10), nullable=False)
-    skill_level = db.Column(db.String(144), nullable=True)
+    skill_level = db.Column(db.String(50), nullable=True)
     type_of_lesson = db.Column(db.String(144), nullable=True)
+    riders_and_horses = db.relationship("HorseRiderLesson", backref='lesson', lazy=True)
+    
 
     def __init__(self, day, start_time, end_time, price, skill_level, type_of_lesson):
         self.day = day
@@ -23,8 +25,8 @@ class Lesson(Base):
     @staticmethod
     def count_all_riders():
         stmt = text("SELECT Lesson.id, Lesson.day, Lesson.start_time, Lesson.end_time, COUNT(Account.id) FROM Lesson"
-                    " LEFT OUTER JOIN userlesson ON Lesson.id = userlesson.lesson_id"
-                    " LEFT OUTER JOIN account ON userlesson.user_id = account.id"
+                    " LEFT OUTER JOIN horse_rider_lesson ON Lesson.id = horse_rider_lesson.lesson_id"
+                    " LEFT OUTER JOIN account ON horse_rider_lesson.account_id = account.id"
                     " GROUP BY Lesson.id")
         res = db.engine.execute(stmt)
 
@@ -34,3 +36,19 @@ class Lesson(Base):
                 {"id": row[0], "day": row[1], "starts": row[2], "ends": row[3], "number_of_riders": row[4]})
 
         return response
+    
+    @staticmethod
+    def get_lessons(skill_level):
+        lessons = []
+        if(skill_level == "easy"):
+            for lesson in db.session.query(Lesson).filter_by(skill_level=skill_level):
+                lessons.append(lesson)
+        elif(skill_level == "intermediate"):
+            for lesson in db.session.query(Lesson).filter_by(skill_level=skill_level):
+                lessons.append(lesson)
+            for lesson in db.session.query(Lesson).filter_by(skill_level="easy"):
+                lessons.append(lesson)
+        else:
+            lessons = Lesson.query.all()
+        
+        return lessons

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, DateField, DecimalField, validators
+from wtforms import StringField, DateField, SelectField, DecimalField, validators
 
 
 class LessonForm(FlaskForm):
@@ -11,7 +11,7 @@ class LessonForm(FlaskForm):
         "Ends at ", [validators.InputRequired(), validators.Length(max=10)])
     price = StringField(
         "Price ", [validators.InputRequired(), validators.Length(max=140)])
-    skill_level = StringField("Skill Level", [validators.Length(max=140)])
+    skill_level = SelectField(u'Skill Level', choices=[("easy", "Easy"), ("intermediate", "Intermediate"), ("advanced", "Advanced")])
     type_of_lesson = StringField(
         "Type Of Lesson ", [validators.Length(max=140)])
 

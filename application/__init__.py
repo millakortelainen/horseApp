@@ -57,8 +57,7 @@ from application.auth import views
 from application.lessons import models
 from application.lessons import views
 
-from application.horses_and_riders import models
-from application.horses_and_riders import views
+from application.horses_riders_lessons import models
 
 
 # login functionality, part 2

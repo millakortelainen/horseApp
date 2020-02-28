@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<h1>Set horses to riders</h1>
+
+<table class="table">
+    <tr>
+        {% for horse in horses %}
+        <th>{{ horse.name }}</th>
+        {% endfor%}
+    </tr>
+
+    <tr>
+        
+            {% for horse in horses %}
+            <td>
+            {% if horse.id in horses_at_lesson%}
+
+            {{ horses_at_lesson[horse.id] }}
+
+            {% else%}
+            <form method="POST" action="{{ url_for('set_horse', lesson_id=lesson.id, horse_id=horse.id) }}">
+
+        {{ form.riders(id=horse.id) }} <input type="submit" value="Set" />
+
+        </form>
+        {% endif %}
+    </td>
+        {% endfor%}
+       
+    </tr>
+
+</table>
+{% endblock %}

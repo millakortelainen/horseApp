@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<h1>Edit</h1>
+{{ error }}
+<form method="POST" action="{{ url_for('user_update') }}">
+  <table class="table">
+    <tr>
+      <td>
+        {{ form.skill_level.label }}
+      </td>
+      <td>
+        {% if not current_user.skill_level %}
+        {{ form.skill_level }}
+        {% else %}
+        {{ current_user.skill_level }}
+        {% endif %}
+      </td>
+    </tr>
+    {% if not current_user.skill_level %}
+    <tr>
+      <td>
+        <input type="submit" value="Save" />
+      </td>
+    </tr>
+    {% endif %}
+  </table>
+</form>
+{% endblock %}

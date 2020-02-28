@@ -1,10 +1,9 @@
 from flask import render_template, request, redirect, url_for
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, current_user
 
 from application import app, db
 from application.auth.models import User
-from application.auth.forms import LoginForm
-from application.auth.forms import NewUserForm
+from application.auth.forms import LoginForm, NewUserForm, EditUserForm
 
 
 @app.route("/auth/login", methods=["GET", "POST"])
@@ -46,3 +45,14 @@ def users_create():
     db.session().commit()
 
     return redirect(url_for("index"))
+
+@app.route("/auth/edit")
+def user_edit():
+    return render_template("auth/edit.html", form=EditUserForm())
+
+@app.route("/auth/update/user", methods=["POST"])
+def user_update():
+    form = EditUserForm(request.form)
+    current_user.skill_level = form.skill_level.data
+    db.session().commit()
+    return redirect(url_for("user_edit"))

@@ -2,7 +2,11 @@
 
 {% block body %}
 <h1>Lessons</h1>
-<table>
+
+{% if not current_user.skill_level%}
+<p>Set your skill level before applying for lessons.</p>
+{% else %}
+<table class="table">
   <tr>
     <th>Date</th>
     <th>Start at</th>
@@ -27,5 +31,5 @@
   </tr>
   {% endfor %}
 </table>
-
+{% endif %}
 {% endblock %}

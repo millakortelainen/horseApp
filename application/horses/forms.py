@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, validators
+from wtforms import SelectField,StringField, validators
 
 
 class HorseForm(FlaskForm):
@@ -8,8 +8,7 @@ class HorseForm(FlaskForm):
     breed = StringField("Breed ", [validators.Length(max=140)])
     gender = StringField(
         "Gender", [validators.InputRequired(), validators.Length(max=10)])
-    skill_level = StringField(
-        "Skill level ", [validators.InputRequired(), validators.Length(max=50)])
-
+    skill_level = SelectField(u'Skill Level', choices=[("easy", "Easy"), ("intermediate", "Intermediate"), ("advanced", "Advanced")])
+    
     class Meta:
         csrf = False

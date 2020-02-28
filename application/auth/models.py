@@ -2,14 +2,6 @@ from application import db
 from application.models import Base
 from sqlalchemy.sql import text
 
-userlesson = db.Table('userlesson',
-                      db.Column('user_id', db.Integer, db.ForeignKey(
-                          'account.id'), primary_key=True),
-                      db.Column('lesson_id', db.Integer, db.ForeignKey(
-                          'lesson.id'), primary_key=True)
-                      )
-
-
 class User(Base):
 
     __tablename__ = "account"
@@ -19,8 +11,8 @@ class User(Base):
     password = db.Column(db.String(144), nullable=False)
     is_student = db.Column(db.Boolean, nullable=False)
     is_teacher = db.Column(db.Boolean, nullable=False)
-    lessons = db.relationship(
-        'Lesson', secondary=userlesson, backref='account')
+    skill_level = db.Column(db.String(50), nullable=True)
+    lessons = db.relationship("HorseRiderLesson", backref='account', lazy=True)
 
     def __init__(self, name, username, password, is_teacher):
         self.name = name
@@ -29,6 +21,7 @@ class User(Base):
         if is_teacher:
             self.is_student = False
             self.is_teacher = True
+            self.skill_level = "advanced"
         else:
             self.is_student = True
             self.is_teacher = False
@@ -46,7 +39,10 @@ class User(Base):
         return True
 
     def roles(self):
-        return ["ADMIN","USER"]
+        if(self.is_student):
+            return ["USER"]
+        else:
+            return ["ADMIN"]
 
     @staticmethod
     def users_lessons():
