@@ -22,29 +22,42 @@ In a account creation it is possible to choose to create a teacher user or a reg
 
 **As a teacher** you can manage riding lessons and horses. **As a user** you can apply for riding lessons and see your statistics.
 
-### Teacher functionalities
+### User functionalities
 
-There are **seven** different tasks to do as a teacher. All of these can be found in the upper part of application.
+There are **three** functions for users. Users and teachers can do the same tasks. All of tasks can be found upper part of application.
 
-* List horses
-List of all existing horses. Horses can be edited and removed.
 
-* Add a horse
-Creation of a new horse. Choose name, gender and skill level for the new horse. The breed field is optional. Notice that you can not switch horse's skill level later.
+* **List lessons**
 
-* List lessons
 List of all existing lessons. Applying for lesson and cancelling the registration for lesson is done here. 
 
-* Add a lesson
+* **Edit your account**
+
+Set user skill level. User must set his/hers skill level before he/she can apply for the lesson. This page also shows user's skill level is user has set it.
+
+* **My lesson data**
+
+Page shows information about you riding lessons. For example all the user's riding lessons are listed.
+
+### Teacher functionalities
+
+There are **seven** different tasks to do as a teacher. This includes all the user functionalities and four more. All of these can be found in the upper part of application.
+
+* **List horses**
+
+List of all existing horses. Horses can be edited and removed.
+
+* **Add a horse**
+
+Creation of a new horse. Choose name, gender and skill level for the new horse. The breed field is optional. Notice that you can not switch horse's skill level later.
+
+* **Add a lesson**
+
 Creation of new lesson is done here. All the fields other than type of lesson must be filled in. Notice that price field only accepts integer values and the skill level of the lesson can not be changed later.
 
-* Manage lessons
+* **Manage lessons**
+
 List of all existing lessons including the possibility to remove, edit and set horses for lesson's riders. **Set horses for riders** shows all the horses which skill level is higher or equal to the lesson's skill level. Under each horse is a drop down menu. Select the rider for the horse from the drop down menu and click set. If horse has a rider already set up, then the drop down menu will not be visible and the riders name is written in field.
 
-* Edit your account
-Change user's skill level here.
-
-* My lesson data
-
-
-
+## Logout from application
+Log out using the link in the upper menu.
