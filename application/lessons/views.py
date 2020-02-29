@@ -8,7 +8,6 @@ from application.horses.models import Horse
 from application.auth.models import User
 from application.horses_riders_lessons.models import HorseRiderLesson
 from application.horses_riders_lessons.forms import HorsesForRidersForm
-from datetime import date
 
 
 @app.route("/lessons/manage", methods=["GET"])
