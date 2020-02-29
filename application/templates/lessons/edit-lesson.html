@@ -8,7 +8,7 @@
         {{ form.day.label }}
       </td>
       <td>
-        {{ form.day }}
+        {{ form.day(type='date') }}
       </td>
       <td>
       <td>
@@ -24,7 +24,7 @@
         {{ form.start_time.label }}
       </td>
       <td>
-        {{ form.start_time }}
+        {{ form.start_time(type='time') }}
       </td>
       <td>
         <ul>
@@ -39,7 +39,7 @@
         {{ form.end_time.label }}
       </td>
       <td>
-        {{ form.end_time }}
+        {{ form.end_time(type='time') }}
       </td>
       <td>
         <ul>
@@ -54,7 +54,7 @@
         {{ form.price.label }}
       </td>
       <td>
-        {{ form.price }}
+        {{ form.price(type='number') }}
       </td>
       <td>
         <ul>

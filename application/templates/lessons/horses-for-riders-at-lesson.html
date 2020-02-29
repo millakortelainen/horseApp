@@ -3,8 +3,13 @@
 {% block body %}
 <h1>Set horses to riders</h1>
 
+{% if not horses %}
+ There are no horses avalable for this lesson.
+{% else %}
+
 <table class="table">
     <tr>
+       
         {% for horse in horses %}
         <th>{{ horse.name }}</th>
         {% endfor%}
@@ -24,4 +29,8 @@
         {% endfor%}
     </tr>
 </table>
+
+{% endif %}
+
+
 {% endblock %}

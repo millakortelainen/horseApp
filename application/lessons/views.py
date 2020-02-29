@@ -3,11 +3,12 @@ from flask_login import current_user
 
 from application import app, db, login_required
 from application.lessons.models import Lesson
-from application.lessons.forms import LessonForm
+from application.lessons.forms import LessonForm, EditLessonForm
 from application.horses.models import Horse
 from application.auth.models import User
 from application.horses_riders_lessons.models import HorseRiderLesson
 from application.horses_riders_lessons.forms import HorsesForRidersForm
+from datetime import date
 
 
 @app.route("/lessons/manage", methods=["GET"])
@@ -43,14 +44,16 @@ def lessons_create():
 @app.route("/lessons/<lesson_id>/", methods=["POST"])
 @login_required(role="ADMIN")
 def edit_lesson(lesson_id):
+    lesson=Lesson.query.get(lesson_id)
+
     return render_template("lessons/edit-lesson.html", lesson=Lesson.query.get(lesson_id),
-                           form=LessonForm(day=lesson.day, start_time=lesson.start_time, end_time=lesson.end_time,
-                                           price=lesson.price, skill_level=lesson.skill_level, type_of_lesson=lesson.type_of_lesson))
+                           form=EditLessonForm(day=lesson.day, start_time = lesson.start_time, end_time =lesson.end_time, price = int(lesson.price), skill_level = lesson.skill_level, type_of_lesson=lesson.type_of_lesson))
 
 
 @app.route("/lessons/set-horses/<lesson_id>/", methods=["POST"])
 @login_required(role="ADMIN")
 def set_horses(lesson_id):
+    lesson=Lesson.query.get(lesson_id)
     lessons_riders = []
     riders = db.session.query(HorseRiderLesson).filter_by(lesson_id=lesson_id)
     for rider in riders:
@@ -89,12 +92,11 @@ def lessons_update(lesson_id):
     lesson.start_time = form.start_time.data
     lesson.end_time = form.end_time.data
     lesson.price = form.price.data
-    lesson.skill_level = form.skill_level.data
     lesson.type_of_lesson = form.type_of_lesson.data
 
     db.session().commit()
 
-    return redirect(url_for("lessons_index"))
+    return redirect(url_for("manage_lessons"))
 
 
 @app.route("/lessons/delete/<lesson_id>/", methods=["POST"])
@@ -110,7 +112,7 @@ def delete_lesson(lesson_id):
     db.session.delete(lesson)
 
     db.session().commit()
-    return redirect(url_for("lessons_index"))
+    return redirect(url_for("manage_lessons"))
 
 
 @app.route("/lessons/sign-up/<lesson_id>/", methods=["POST"])

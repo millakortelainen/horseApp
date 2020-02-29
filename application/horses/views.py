@@ -51,9 +51,6 @@ def edit_horse(horse_id):
 def horses_update(horse_id):
     form = HorseForm(request.form)
 
-    if not form.validate():
-        return render_template("horses/edit-horse.html", form=form)
-
     horse = Horse.query.get(horse_id)
     horse.name = form.name.data
     horse.gender = form.gender.data
