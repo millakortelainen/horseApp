@@ -69,4 +69,4 @@ def statistics():
         users_lessons.append(Lesson.query.get(lesson_id))
 
     
-    return render_template("auth/statistics.html", lessons=users_lessons, horse_data = User.horses_of_rider(current_user.id), total_price=User.prices(current_user.id))
+    return render_template("auth/statistics.html", lessons=users_lessons, horse_data = User.horses_of_rider(current_user.id), total_price=User.total_price(current_user.id))

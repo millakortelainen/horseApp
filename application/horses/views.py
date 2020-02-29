@@ -69,13 +69,13 @@ def horses_update(horse_id):
 @login_required(role="ADMIN")
 def delete_horse(horse_id):
     horse = Horse.query.get(horse_id)
-    all = HorseRiderLesson.query.all()
+    all_horses_in_lessons = HorseRiderLesson.query.all()
 
-    for i in all:
-        if(i.horse_id == int(horse_id)):
-            i.horse.id = None
+    for ref in all_horses_in_lessons:
+        if(ref.horse_id == int(horse_id)):
+            ref.horse_id = None
 
     db.session.delete(horse)
 
     db.session().commit()
-    return render_template("horses/list.html", horses=Horse.query.all())
+    return redirect(url_for("horses_index"))

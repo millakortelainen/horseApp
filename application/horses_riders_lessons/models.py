@@ -30,10 +30,10 @@ class HorseRiderLesson(db.Model):
     
     @staticmethod
     def get_rider_in_lesson(lesson_id,account_id):
-        riders = db.session.query(HorseRiderLesson).filter_by(lesson_id=lesson_id)
-        for rider in riders:
-            if rider.account_id == account_id:
-                return rider    
+        references = db.session.query(HorseRiderLesson).filter_by(lesson_id=lesson_id)
+        for ref in references:
+            if ref.account_id == account_id:
+                return ref    
 
     @staticmethod
     def horses_of_lesson(id):

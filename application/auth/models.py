@@ -63,13 +63,13 @@ class User(Base):
         return response
 
     @staticmethod
-    def prices(user_id):
+    def total_price(user_id):
 
         stmt = text("SELECT Lesson.price FROM Lesson"
                     " LEFT OUTER JOIN horse_rider_lesson ON Lesson.id = horse_rider_lesson.lesson_id"
                     " LEFT OUTER JOIN account ON horse_rider_lesson.account_id = account.id"
-                    " WHERE Account.id = :a")
-        res = db.engine.execute(stmt, a=user_id)
+                    " WHERE Account.id = :user_id")
+        res = db.engine.execute(stmt, user_id=user_id)
 
         total_price = 0
         for row in res:
